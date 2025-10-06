@@ -10,7 +10,7 @@ curl $API_BASE"/openai/deployments/"$DEPLOYMENT_ID"/chat/completions?api-version
   -H "OpenAI-Organization: $ORGANIZATION" \
   -H "api-key: $API_KEY" \
   -d '{
-  "model": "gpt-35-turbo",
+  "model": "gpt-4.1-nano",
   "messages": [{"role":"system","content":"You are a helpful bot"},{"role":"user","content":"What is 2+2"}],
   "max_tokens": 512,
   "temperature": 0,
