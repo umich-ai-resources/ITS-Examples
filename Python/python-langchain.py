@@ -16,8 +16,8 @@ except TypeError:
 # Define llm parameters
 llm = ChatOpenAI(
     model_name=os.environ['MODEL'],
-    openai_api_key=os.environ['OPENAI_API_KEY'],
-    openai_api_base = os.environ['OPENAI_API_BASE']
+    api_key=os.environ['OPENAI_API_KEY'],
+    base_url = os.environ['OPENAI_API_BASE']
 )
 
 #Create Query

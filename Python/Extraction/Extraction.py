@@ -13,7 +13,7 @@ if not load_dotenv('.env'):
 # Create OpenAI client
 client = OpenAI(
     api_key=os.environ['OPENAI_API_KEY'],
-    organization=os.environ.get('OPENAI_ORGANIZATION')
+    base_url=os.environ.get("OPENAI_API_BASE"),
 )
 
 # Returns a list of entities based on the label given.
