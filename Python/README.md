@@ -1,9 +1,9 @@
-# examples
-A collection of code examples you can use to access the U-M GPT Toolkit API service.  
+# Examples
+This is a collection of example code for accessing the U-M GPT Toolkit API service.  
 
 **Common required parameters**  
   
-Note that these parameters may be represented by slightly differnt naming conventions, depepending on script language and module requirements.  
+Note that these parameters may be represented by slightly different naming conventions, depepending on script language and module requirements.  
    
 MODEL = Model names (gpt-4o, gpt-4.1, and etc)  
 API gateway URL = "https://api.umgpt.umich.edu/azure-openai-api"    
@@ -12,15 +12,15 @@ DEPLOYMENT_ID = "gpt-4.1" #chat deployment model name
 API_KEY #your 32 character API key  
 ORGANIZATION #a valid 6 digit shortcode  
 
-Please create a .env in the same directory as your script with the following:
+Please create a .env in the same directory as the script you want to run with the following:
 
+MODEL=X  
+OPENAI_API_BASE=https://api.umgpt.umich.edu/azure-openai-api  
+OPENAI_API_KEY=X   
+OPENAI_ORGANIZATION=X  
+API_VERSION=2024-06-01  
 
-MODEL=gpt-4o<br />
-OPENAI_API_BASE=https://api.umgpt.umich.edu/azure-openai-api<br />
-OPENAI_API_KEY=X<br />
-OPENAI_ORGANIZATION=X<br />
-API_VERSION=2024-06-01<br />
-
+Change the model, key, and organization (optional) to your parameters. Models can be displayed by running the get_models.py file; note that some models may be deprecated or unavailable. 
 
 **References**  
   
