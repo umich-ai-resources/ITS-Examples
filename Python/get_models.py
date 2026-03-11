@@ -19,5 +19,22 @@ client = OpenAI(
 )
 
 models = client.models.list()
+
+# Group models by provider prefix (e.g., @google/, @anthropic/)
+groups = {}
 for model in models.data:
-    print(model.id)
+    model_id = model.id
+    if '/' in model_id:
+        provider, name = model_id.split('/', 1)
+        provider = provider.lstrip('@').title()
+    else:
+        provider = 'General'
+        name = model_id
+    groups.setdefault(provider, []).append(model_id)
+
+# Print sorted groups with sorted models
+for provider in sorted(groups):
+    model_list = sorted(groups[provider])
+    print(f"\n{provider} ({len(model_list)} models):")
+    for model_id in model_list:
+        print(f"  {model_id}")

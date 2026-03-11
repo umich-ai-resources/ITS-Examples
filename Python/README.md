@@ -15,12 +15,14 @@ ORGANIZATION #a valid 6 digit shortcode
 Please create a .env in the same directory as the script you want to run with the following:
 
 MODEL=X  
-OPENAI_API_BASE=https://api.umgpt.umich.edu/azure-openai-api  
+OPENAI_API_BASE=X 
 OPENAI_API_KEY=X   
 OPENAI_ORGANIZATION=X  
 API_VERSION=2024-06-01  
 
-Change the model, key, and organization (optional) to your parameters. Models can be displayed by running the get_models.py file; note that some models may be deprecated or unavailable. 
+Change the model, base url, api key, and organization (optional) to your parameters. 
+
+Model options can be displayed by running the get_models.py file; note that some models in the list may be deprecated or unavailable. These will produce an error message: 'The model &lt;model name&gt; does not exist or you do not have access to it.' If this happens, try a different model. 
 
 **References**  
   
