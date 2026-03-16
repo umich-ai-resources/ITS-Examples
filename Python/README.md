@@ -15,7 +15,7 @@ ORGANIZATION #a valid 6 digit shortcode
 Please create a .env in the same directory as the script you want to run with the following:
 
 MODEL=X  
-OPENAI_API_BASE=X 
+OPENAI_API_BASE=X   
 OPENAI_API_KEY=X   
 OPENAI_ORGANIZATION=X  
 API_VERSION=2024-06-01  
