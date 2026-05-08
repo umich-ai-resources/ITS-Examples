@@ -2,9 +2,10 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
+#Set the current working directory to be the same as the file.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-#Load .env
+#Load environment file for secrets.
 try:
     if load_dotenv('.env') is False:
         raise TypeError
@@ -12,6 +13,7 @@ except TypeError:
     print('Unable to load .env file.')
     quit()
 
+#Create OpenAI client.
 client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
     base_url=os.environ.get("OPENAI_API_BASE")
@@ -19,7 +21,7 @@ client = OpenAI(
 
 models = client.models.list()
 
-# Group models by provider
+#Group models by provider.
 groups = {}
 for model in models.data:
     model_id = model.id
@@ -31,7 +33,7 @@ for model in models.data:
         name = model_id
     groups.setdefault(provider, []).append(model_id)
 
-# Print sorted groups with sorted models
+#Print sorted groups with sorted models.
 for provider in sorted(groups):
     model_list = sorted(groups[provider])
     print(f"\n{provider} ({len(model_list)} models):")

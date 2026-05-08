@@ -3,7 +3,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import base64
 
-#Sets the current working directory to be the same as the file.
+#Set the current working directory to be the same as the file.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #Load environment file for secrets.
@@ -13,13 +13,14 @@ try:
 except TypeError:
     print('Unable to load .env file.')
     quit()
-#Create OpenAI client
+
+#Create OpenAI client.
 client = OpenAI(
     api_key=os.environ['OPENAI_API_KEY'],
     base_url=os.environ['OPENAI_API_BASE']
 )
 
-#Create Query
+#Create Query.
 messages=[
         {"role": "system", "content": "You are a helpful assistant that responds in Markdown!  Help the user by describing the picture."},
         {"role": "user", "content": [
@@ -30,12 +31,12 @@ messages=[
         ]}
     ]
 
+# Send a completion request.
 response = client.chat.completions.create(
     model=os.environ['MODEL'],
     messages=messages,
     temperature=0.0,
 )
-
 
 #Print response.
 print(response.choices[0].message.content)

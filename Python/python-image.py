@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 #Set the current working directory to be the same as the file.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# Load environment file for secrets.
+#Load environment file for secrets.
 try:
     if load_dotenv('.env') is False:
         raise TypeError
@@ -14,13 +14,13 @@ except TypeError:
     print('Unable to load .env file.')
     quit()
 
-#Create OpenAI client
+#Create OpenAI client.
 client = OpenAI(
     api_key=os.environ['OPENAI_API_KEY'],
     base_url=os.environ["OPENAI_API_BASE"],
 )
 
-# Send a completion request.
+#Send a completion request.
 response = client.images.generate(
     model=os.environ['MODEL'],
     prompt="University of Michigan block M logo in the style of a Pixar movie, with a blue sky and green grass background",

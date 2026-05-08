@@ -5,7 +5,7 @@ import openai
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
-#Sets the current working directory to be the same as the file.
+#Set the current working directory to be the same as the file.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #Load environment file for secrets.
@@ -22,7 +22,7 @@ client = OpenAI(
     base_url=os.environ['OPENAI_API_BASE']
 )
 
-# Define the Pydantic model for the structured output
+#Define the Pydantic model for the structured output.
 class Extract(BaseModel):
     University: list[str]
     Facility: list[str]
@@ -35,7 +35,7 @@ class Extract(BaseModel):
     Mascot: list[str]
 
 
-# Define tools for the OpenAI client
+#Define tools for the OpenAI client.
 tools = [openai.pydantic_function_tool(Extract)]
 
 text = """"I am a student at the University of Michigan in Ann Arbor, MI.
@@ -44,13 +44,13 @@ The first game of the 2024 football season is on August 31st. U of M's fight son
 The Ann Arbor campus is divided into four main areas: North campus, Central campus, Medical campus, and South campus, for a combined area of more than 37.48 million square feet.
 UMich's mascot is the wolverine."""
 
-#Create Query
+#Create Query.
 messages=[
         {"role": "system","content": "You are an expert in Natural Language Processing. Your task is to identify common Named Entities (NER) in a given text.  Use the tools you have been given to structure the extracted data in the desired format."},
         {"role": "user","content": f"{text}"},
     ]
 
-# Send a completion request.
+#Send a completion request.
 response = client.beta.chat.completions.parse(
     model=os.environ['MODEL'],
     messages=messages,

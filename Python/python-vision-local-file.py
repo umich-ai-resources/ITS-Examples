@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import base64
 from mimetypes import guess_type
 
-#Sets the current working directory to be the same as the file.
+#Set the current working directory to be the same as the file.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 #Load environment file for secrets.
@@ -19,13 +19,13 @@ except TypeError:
 image_path = '' # Replace with your local image path
 imagedata = base64.b64encode(open(image_path, 'rb').read()).decode('ascii')
 
-#Create OpenAI client
+#Create OpenAI client.
 client = OpenAI(
     api_key=os.environ['OPENAI_API_KEY'],
     base_url=os.environ['OPENAI_API_BASE']
 )
-# print(data_url)
-#Create Query
+
+#Create Query.
 messages=[
         {"role": "system", "content": "As an AI tool specialized in image recognition, you will be given an image and asked to answer a question about it."},
         {"role": "user", "content": [
@@ -35,12 +35,12 @@ messages=[
         ]}
     ]
 
+# Send a completion request.
 response = client.chat.completions.create(
     model=os.environ['MODEL'],
     messages=messages,
     temperature=0.0,
 )
-
 
 #Print response.
 print(response.choices[0].message.content)
