@@ -1,9 +1,7 @@
 #!/bin/bash
-export API_KEY="esCbVum3CEmx3fc9illj8YQoVI1i"
-export API_BASE="https://api.toolkit.umgpt.umich.edu/v1"
-export API_VERSION="X"
-export ORGANIZATION="X"
-export DEPLOYMENT_ID="gpt-4.1"
+export API_KEY=""
+export API_BASE=""
+export DEPLOYMENT_ID="" #model name
 
 curl $API_BASE"/openai/deployments/"$DEPLOYMENT_ID"/chat/completions?api-version="$API_VERSION \
   -H "Content-Type: application/json" \
