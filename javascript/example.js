@@ -2,33 +2,29 @@
 
 import OpenAI from 'openai';
 
-// The name of your Azure OpenAI Resource.
-const api_base = 'https://api.umgpt.umich.edu/azure-openai-api';
+// API Base URL provided to you by ITS
+const api_base = '';
 
-// Corresponds to your Model deployment within your OpenAI resource, e.g. my-gpt35-16k-deployment
-const model = 'gpt-35-turbo';
-
-// https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#rest-api-versioning
-const api_version = '2023-05-15';
+// AI model you would like to use
+const model = '';
 
 //API Key Provided to you by ITS.
-const apiKey = ""
-//Your shortcode.
-const organization = ""
-if (!apiKey) {
+const api_key = ''
+
+if (!api_key) {
   throw new Error('The OPENAI_API_KEY environment variable is missing or empty.');
 }
-
-if (!organization) {
-  throw new Error('The organization environment variable is missing or empty.');
+if (!api_base) {
+  throw new Error('The OPENAI_API_BASE environment variable is missing or empty.');
+}
+if (!model) {
+  throw new Error('The OPENAI_API_MODEL environment variable is missing or empty.');
 }
 
-// Azure OpenAI requires a custom baseURL, api-version query param, and api-key header.
+// OpenAI requires a key and base url
 const openai = new OpenAI({
-  apiKey,
-  baseURL: `${api_base}/openai/deployments/${model}`,
-  defaultQuery: { 'api-version': api_version },
-  defaultHeaders: { 'api-key': apiKey, 'openai-organization': organization },
+  apiKey: api_key,
+  baseURL: api_base,
 });
 
 async function main() {
@@ -36,7 +32,7 @@ async function main() {
     model,
     messages: [{ role: 'user', content: 'Say hello!' }],
   });
-  console.log( JSON.stringify(result, null, "    ") );
+  console.log(JSON.stringify(result, null, "    "));
 }
 
 main().catch((err) => {
