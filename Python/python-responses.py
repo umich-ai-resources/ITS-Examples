@@ -1,9 +1,12 @@
-"""Example of using a reasoning model (e.g. o1, o3-mini) via the LLM Gateway.
+"""Example using the OpenAI Responses API — the preferred endpoint for the LLM Gateway.
 
-Reasoning models think through problems step-by-step before responding.
-They use a 'reasoning' parameter instead of temperature, and do not support:
-temperature, top_p, presence_penalty, frequency_penalty, or logprobs.
-Make sure your .env MODEL value is set to a reasoning-capable model.
+The Responses API (client.responses.create) is the modern, recommended way to interact
+with the LLM Gateway. It provides a simpler interface than Chat Completions.
+
+Key differences from Chat Completions:
+  - Use 'instructions' for the system prompt instead of a 'system' role message.
+  - Use 'input' for the user prompt instead of a 'messages' list.
+  - Access the reply with response.output_text instead of response.choices[0].message.content.
 """
 import os
 
@@ -29,14 +32,13 @@ client = OpenAI(
 )
 
 # Send a request using the Responses API.
-# reasoning.effort controls how much internal thinking the model does.
-# Options: "low" (fast), "medium" (balanced), "high" (most thorough).
+# 'instructions' sets the system-level behavior and persona for the model.
+# 'input' is the user's question or prompt.
 response = client.responses.create(
     model=os.environ['MODEL'],
     instructions="You are a helpful assistant. Always say GO BLUE! at the end of your response.",
     input="Explain step by step. Where is the University of Michigan?",
-    reasoning={"effort": "high"},
 )
 
-# Print the text content of the response.
+# response.output_text is a convenience property that returns the first text output.
 print(response.output_text)

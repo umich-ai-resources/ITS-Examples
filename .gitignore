@@ -161,3 +161,4 @@ cython_debug/
 .DS_Store
 Maizey_API/maizeyapi_test.py
 python-test.py
+Python/test_examples.py
