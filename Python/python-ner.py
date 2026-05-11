@@ -1,22 +1,30 @@
 """Named Entity Recognition (NER) example using the Responses API and the LLM Gateway.
 
-The model is prompted with a set of entity labels and a sample text, then asked
-to identify and return instances of each label. A few-shot example is embedded in
-the instructions so the model understands the expected output format.
+Two techniques are layered together:
+  1. Few-shot prompting — a worked example in the instructions shows the model
+     the exact label set and output format it should produce.
+  2. Structured outputs — a Pydantic model defines the schema and is passed to
+     the API as a strict JSON Schema, so the response is guaranteed to parse
+     into a typed Python object.
+
+Either technique works on its own; using both gives the model a concrete
+demonstration *and* a hard schema contract.
 """
 import os
+import sys
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from pydantic import BaseModel
 
 # Set the current working directory to the same directory as this file.
 # This ensures the .env file is found regardless of where the script is run from.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables (API key, base URL, model name) from the .env file.
-if not load_dotenv('.env'):
-    print('Unable to load .env file.')
-    quit()
+if not load_dotenv(".env"):
+    print("Unable to load .env file.", file=sys.stderr)
+    sys.exit(1)
 
 # Create the OpenAI client pointed at the LLM Gateway base URL.
 client = OpenAI(
@@ -25,71 +33,82 @@ client = OpenAI(
 )
 
 
-def labels():
-    """Return the list of entity types the model should extract.
-
-    Using a list (not a set) preserves insertion order so the system prompt
-    is deterministic across runs — important for reproducible NER results.
-    """
-    return [
-        'University',
-        'Department',
-        'Role',
-        'Supervisor Name',
-        'Facility',
-        'City',
-        'State',
-        'Location',
-        'Event',
-        'Work_of_art',
-        'Date',
-        'Time',
-        'Quantity',
-        'Mascot',
-    ]
+# Pydantic model defining the exact set of entity labels to extract.
+# Field names double as the label set used in the prompt and few-shot example,
+# so there is one source of truth for what the model should return.
+class Entities(BaseModel):
+    University: list[str]
+    Department: list[str]
+    Role: list[str]
+    Supervisor_Name: list[str]
+    Facility: list[str]
+    City: list[str]
+    State: list[str]
+    Location: list[str]
+    Event: list[str]
+    Work_of_art: list[str]
+    Date: list[str]
+    Time: list[str]
+    Quantity: list[str]
+    Mascot: list[str]
 
 
 def few_shot_example():
-    """Return a concrete example showing the model the desired JSON output format."""
+    """Return a worked example using the exact labels defined by the Entities model."""
     return """\
 EXAMPLE:
-    Text: 'In Germany, in 1440, goldsmith Johannes Gutenberg invented the movable-type printing press. His work led to an information revolution and the unprecedented mass-spread / \
-of literature throughout Europe. Modelled on the design of the existing screw presses, a single Renaissance movable-type printing press could produce up to 3,600 pages per workday.'
+    Text: 'Dr. Jane Smith is a professor in the Computer Science Department at Stanford University in Palo Alto, CA. She advises graduate student Alex Chen and teaches in the Gates Computer Science Building. Stanford's mascot is the Cardinal. The department hosted its annual Research Symposium on October 5, 2023 at 2:00 pm, drawing over 500 attendees.'
     {
-        "gpe": ["Germany", "Europe"],
-        "date": ["1440"],
-        "person": ["Johannes Gutenberg"],
-        "product": ["movable-type printing press"],
-        "event": ["Renaissance"],
-        "quantity": ["3,600 pages"],
-        "time": ["workday"]
+        "University": ["Stanford University"],
+        "Department": ["Computer Science Department"],
+        "Role": ["professor", "graduate student"],
+        "Supervisor_Name": ["Dr. Jane Smith"],
+        "Facility": ["Gates Computer Science Building"],
+        "City": ["Palo Alto"],
+        "State": ["CA"],
+        "Location": [],
+        "Event": ["Research Symposium"],
+        "Work_of_art": [],
+        "Date": ["October 5, 2023"],
+        "Time": ["2:00 pm"],
+        "Quantity": ["500 attendees"],
+        "Mascot": ["Cardinal"]
     }
 --"""
 
 
-def build_instructions(labels_list):
+def build_instructions():
     """Build the full system instructions including entity types and a few-shot example."""
-    types = ", ".join(labels_list)
+    types = ", ".join(Entities.model_fields.keys())
     system = (
         "You are an expert in Natural Language Processing. Your task is to identify common "
-        f"Named Entities (NER) in a given text.\n"
-        f"The possible common Named Entities (NER) types are exclusively: ({types})."
+        "Named Entities (NER) in a given text.\n"
+        f"The possible Named Entity (NER) types are exclusively: ({types}). "
+        "Return a JSON object with one key per label, whose value is a list of matching "
+        "strings from the text. Use an empty list for labels with no matches."
     )
     return f"{system}\n\n{few_shot_example()}"
 
 
-def run_ner_task(labels_list, text):
-    """Send the NER request to the LLM Gateway and return the extracted entity text.
+def run_ner_task(text):
+    """Send the NER request to the LLM Gateway with a strict JSON Schema and return the parsed result."""
+    schema = Entities.model_json_schema()
+    schema["additionalProperties"] = False
 
-    The few-shot example is embedded in the instructions rather than passed as a
-    separate assistant turn, which is the idiomatic pattern for the Responses API.
-    """
     response = client.responses.create(
         model=os.environ['MODEL'],
-        instructions=build_instructions(labels_list),
+        instructions=build_instructions(),
         input=f"\nTASK:\n    Text: {text}\n",
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "Entities",
+                "schema": schema,
+                "strict": True,
+            }
+        },
     )
-    return response.output_text
+    return Entities.model_validate_json(response.output_text)
 
 
 # Sample text containing a variety of entity types for demonstration.
@@ -106,6 +125,5 @@ text = (
     "UMich's mascot is the wolverine."
 )
 
-labels_list = labels()
-result = run_ner_task(labels_list, text)
-print(result)
+result = run_ner_task(text)
+print(result.model_dump_json(indent=2))

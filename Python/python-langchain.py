@@ -4,6 +4,7 @@ LangChain's ChatOpenAI wraps the OpenAI-compatible API, making it easy to
 swap in the LLM Gateway by providing the custom base_url.
 """
 import os
+import sys
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -13,12 +14,9 @@ from langchain_openai import ChatOpenAI
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables (API key, base URL, model name) from the .env file.
-try:
-    if load_dotenv('.env') is False:
-        raise TypeError
-except TypeError:
-    print('Unable to load .env file.')
-    quit()
+if not load_dotenv(".env"):
+    print("Unable to load .env file.", file=sys.stderr)
+    sys.exit(1)
 
 # Configure the LangChain LLM wrapper to point at the LLM Gateway.
 # base_url overrides the default OpenAI endpoint, routing requests to the gateway.

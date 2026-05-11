@@ -9,6 +9,7 @@ For new projects, consider the Responses API (see python-responses.py), which
 provides a simpler interface with built-in multi-turn and tool-use support.
 """
 import os
+import sys
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -18,12 +19,9 @@ from openai import OpenAI
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables (API key, base URL, model name) from the .env file.
-try:
-    if load_dotenv('.env') is False:
-        raise TypeError
-except TypeError:
-    print('Unable to load .env file.')
-    quit()
+if not load_dotenv(".env"):
+    print("Unable to load .env file.", file=sys.stderr)
+    sys.exit(1)
 
 # Create the OpenAI client pointed at the LLM Gateway base URL.
 client = OpenAI(

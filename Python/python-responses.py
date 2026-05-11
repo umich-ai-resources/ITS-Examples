@@ -9,6 +9,7 @@ Key differences from Chat Completions:
   - Access the reply with response.output_text instead of response.choices[0].message.content.
 """
 import os
+import sys
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -18,12 +19,9 @@ from openai import OpenAI
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables (API key, base URL, model name) from the .env file.
-try:
-    if load_dotenv('.env') is False:
-        raise TypeError
-except TypeError:
-    print('Unable to load .env file.')
-    quit()
+if not load_dotenv(".env"):
+    print("Unable to load .env file.", file=sys.stderr)
+    sys.exit(1)
 
 # Create the OpenAI client pointed at the LLM Gateway base URL.
 client = OpenAI(
