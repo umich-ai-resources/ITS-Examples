@@ -1,6 +1,6 @@
-# cURL Example
+# curl Example
 
-This is an example cURL command for accessing the U-M GPT Toolkit API.
+This is an example curl command for accessing the U-M GPT Toolkit API.
 
 ## Setup
 
