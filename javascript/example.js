@@ -2,14 +2,14 @@
 
 import OpenAI from 'openai';
 
+//API Key Provided to you by ITS.
+const api_key = ''
+
 // API Base URL provided to you by ITS
 const api_base = '';
 
 // AI model you would like to use
 const model = '';
-
-//API Key Provided to you by ITS.
-const api_key = ''
 
 if (!api_key) {
   throw new Error('The OPENAI_API_KEY environment variable is missing or empty.');

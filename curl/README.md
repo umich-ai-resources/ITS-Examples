@@ -1,11 +1,15 @@
-# examples
-A collection of code examples you can use to access the U-M GPT Toolkit API service.  
+# cURL Example
 
-**Common required parameters**  
-  
-Note that these parameters may be represented by slightly different naming conventions, depepending on script language and module requirements.  
+This is an example cURL command for accessing the U-M GPT Toolkit API.
 
-MODEL (model name - available models can be accessed by running the get_models.py file in the Python folder.)  
-API_GATEWAY_URL (API endpoint)  
-API_KEY (your API key)  
+## Setup
 
+Fill in your credentials in curl.sh for API_KEY, API_BASE, and API_MODEL.
+
+| Variable | Description |
+|----------|-------------|
+| `API_KEY` | Your API key |
+| `API_BASE` | The gateway base URL |
+| `MODEL` | Model to be used |
+
+Run `Python/get_models.py` to see all available model names.

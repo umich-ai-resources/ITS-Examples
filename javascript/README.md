@@ -1,13 +1,18 @@
-# examples
-A collection of code examples you can use to access the U-M GPT Toolkit API service.  
+# Javascript Example
 
-**Common required parameters**  
-  
-Note that these parameters may be represented by slightly different naming conventions, depepending on script language and module requirements.  
+This is an example Javascript script for accessing the U-M GPT Toolkit API.
 
-MODEL (model name - available models can be accessed by running the get_models.py file in the Python folder.)  
-API_GATEWAY_URL (API endpoint)  
-API_KEY (your API key)  
+## Setup
+
+Fill in your credentials in example.js for api_key, api_base, and model.
+
+| Variable | Description |
+|----------|-------------|
+| `api_key` | Your API key |
+| `api_base` | The gateway base URL |
+| `model` | Model to be used |
+
+Run `Python/get_models.py` to see all available model names.
 
 Please create a package.json file in the same directory as your script with the following:
 
