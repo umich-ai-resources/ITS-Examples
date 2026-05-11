@@ -34,7 +34,7 @@ for model in models.data:
         provider, name = model_id.split('-', 1)
         provider = provider.lstrip('@').title()
     else:
-        provider = 'General'
+        provider = 'Other'
         name = model_id
     groups.setdefault(provider, []).append(model_id)
 
