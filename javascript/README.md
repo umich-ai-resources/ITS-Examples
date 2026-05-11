@@ -1,6 +1,6 @@
-# Javascript Example
+# JavaScript Example
 
-This is an example Javascript script for accessing the U-M GPT Toolkit API.
+This is an example JavaScript script for accessing the U-M GPT Toolkit API.
 
 ## Setup
 
