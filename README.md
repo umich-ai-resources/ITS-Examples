@@ -1,18 +1,59 @@
-# examples
-A collection of code examples you can use to access the U-M GPT Toolkit API service.  
+# U-M GPT Toolkit — Code Examples
 
-**Common required parameters**  
-  
-Note that these parameters may be represented by slightly differnt naming conventions, depepending on script language and module requirements.  
+A collection of code examples for accessing the [U-M GPT Toolkit](https://its.umich.edu/computing/ai/gpt-toolkit-in-depth) API service. For a full overview of AI services available at the University of Michigan, visit the [U-M AI Services page](https://its.umich.edu/computing/ai).
 
+## Required parameters
 
-model = Model names (gpt-4o, gpt-4.1, and etc)
-API gateway URL = "https://api.umgpt.umich.edu/azure-openai-api"  
-API VERSION = "2025-04-01-preview" #This is not the model version  
-DEPLOYMENT_ID = "gpt-4.1" #chat deployment model name  
-API_KEY #your 32 character API key  
-ORGANIZATION #a valid 6 digit shortcode  
+Each example requires three parameters. These may be named slightly differently depending on the language or framework.
 
-**References**  
-  
-[Azure OpenAI Service REST API reference](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference)
+| Parameter | Description |
+|-----------|-------------|
+| `OPENAI_API_KEY` | Your API key |
+| `OPENAI_API_BASE` | The gateway base URL |
+| `MODEL` | The model you want to use |
+
+Run `Python/get_models.py` to see the full list of available model names.
+
+## Endpoint compatibility
+
+Not all models support every endpoint. Use the matrix below as a reference when choosing a model for your use case.
+
+| Model | Chat Completions | Responses API | Embeddings | Image Generation | Reasoning
+|-------|:---:|:---:|:---:|:---:|:---:|
+| gpt-4o | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-4o-mini | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-4.1 | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-4.1-mini | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-4.1-nano | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-5 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5-mini | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.1 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.2 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.4 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.5 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-image-1.5 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| gpt-image-2 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| o1 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| o3 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| claude-haiku-4-5 | ✅ | ✅ | ❌ | ❌ | ❌ |
+| claude-sonnet-4-6 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| claude-opus-4-6 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| claude-opus-4-7 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gemini-3-flash-preview | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gemini-3-flash-image-preview | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Llama-4-Maverick-17B-128E-Instruct-FP8 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Llama-4-Scout-17B-16E-Instruct | ✅ | ❌ | ❌ | ❌ | ❌ |
+| text-embedding-3-small | ❌ | ❌ | ✅ | ❌ | ❌ |
+| text-embedding-3-large | ❌ | ❌ | ✅ | ❌ | ❌ |
+
+> **Note:** This table reflects current gateway support and will be updated as new models and endpoints are added.
+
+## Examples by language
+
+| Language | Folder |
+|----------|--------|
+| Python | [Python/](Python/) |
+| JavaScript | [JavaScript/](JavaScript/) |
+| curl | [curl/](curl/) |
+| PowerShell | [PowerShell/](PowerShell/) |
+

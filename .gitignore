@@ -159,5 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .DS_Store
+node_modules/
 Maizey_API/maizeyapi_test.py
 python-test.py
+Python/test_examples.py
