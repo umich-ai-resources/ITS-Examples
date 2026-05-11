@@ -54,6 +54,6 @@ Not all models support every endpoint. Use the matrix below as a reference when 
 |----------|--------|
 | Python | [Python/](Python/) |
 | JavaScript | [JavaScript/](JavaScript/) |
-| cURL | [Curl/](Curl/) |
+| curl | [curl/](curl/) |
 | PowerShell | [PowerShell/](PowerShell/) |
 
