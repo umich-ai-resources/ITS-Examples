@@ -25,27 +25,26 @@ Not all models support every endpoint. Use the matrix below as a reference when 
 | gpt-4.1 | ✅ | ✅ | ❌ | ❌ | ❌ |
 | gpt-4.1-mini | ✅ | ✅ | ❌ | ❌ | ❌ |
 | gpt-4.1-nano | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5-mini | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5.1 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5.2 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5.4 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gpt-5.5 | ✅ | ✅ | ❌ | ❌ | ❌ |
+| gpt-5 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5-mini | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.1 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.2 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.4 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gpt-5.5 | ✅ | ✅ | ❌ | ❌ | ✅ |
 | gpt-image-1.5 | ❌ | ❌ | ❌ | ✅ | ❌ |
 | gpt-image-2 | ❌ | ❌ | ❌ | ✅ | ❌ |
 | o1 | ✅ | ✅ | ❌ | ❌ | ✅ |
 | o3 | ✅ | ✅ | ❌ | ❌ | ✅ |
 | claude-haiku-4-5 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| claude-sonnet-4-6 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| claude-opus-4-6 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| claude-opus-4-7 | ✅ | ✅ | ❌ | ❌ | ❌ |
-| gemini-3-flash-preview | ✅ | ✅ | ❌ | ❌ | ❌ |
+| claude-sonnet-4-6 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| claude-opus-4-6 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| claude-opus-4-7 | ✅ | ✅ | ❌ | ❌ | ✅ |
+| gemini-3-flash-preview | ✅ | ✅ | ❌ | ❌ | ✅ |
 | gemini-3-flash-image-preview | ❌ | ❌ | ❌ | ✅ | ❌ |
 | Llama-4-Maverick-17B-128E-Instruct-FP8 | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Llama-4-Scout-17B-16E-Instruct | ✅ | ❌ | ❌ | ❌ | ❌ |
 | text-embedding-3-small | ❌ | ❌ | ✅ | ❌ | ❌ |
 | text-embedding-3-large | ❌ | ❌ | ✅ | ❌ | ❌ |
-
 
 > **Note:** This table reflects current gateway support and will be updated as new models and endpoints are added.
 
