@@ -4,7 +4,7 @@ Once you’ve created your Maizey project and added an app to it, you’ll have 
 
 ![Getting Started](../docs/img/1configure_app.png)
 
-To create a new API token, select **API Config** from the menu. Provide a purpose for the token, agree to the terms and conditions, and then click **Submit**. A pop-up window displays with your token. **Save it in a secure location; you will not be able to see it again after you close the popup.**
+To create a new API token, select **API Config** from the menu. Provide a purpose for the token, agree to the terms and conditions, and then click **Submit**. A pop-up window displays with your token. **Save it in a secure location; you will not be able to see it again after you close the popup.** You will need to generate a separate token for each Maizey App you want to use with the API.
 
 ![Getting Started](../docs/img/2new_token.png)
 
@@ -39,7 +39,7 @@ The output will contain the response from your Maizey.
 
 ![Getting Started](../docs/img/10maizey_response.png)
 
-If you go back to your Maizey project, you will see that your query and response will also be reflected as a new chat. Remember that there is no endpoint for managing or deleting conversations or messages at this time.
+If you go back to your Maizey project, you will see that your query and response will also be reflected as a new chat. Remember that there is no endpoint for managing or deleting apps, conversations or messages at this time.
 
 ![Getting Started](../docs/img/11maizey_interface.png)
 
@@ -64,7 +64,7 @@ In this folder, we have also provided example Powershell and Python scripts for 
 3. Call the function with your values:   
 
     ```
-    New-MaizeyChat -maizeyProjectId "your-project-id" -prompt "your-question-here" -apiKey "your-api-key"       
+    New-MaizeyChat -maizeyProjectId "your-project-id" -prompt "your-question-here" -apiKey "your-maizey-app-token"       
     ```                      
   
 ## Python Example
@@ -77,7 +77,8 @@ In this folder, we have also provided example Powershell and Python scripts for 
 
     | Variable | Description |
     |----------|-------------|
-    | `token` | Your Maizey API token |
+    | `token` | Your Maizey App API token |
 
 2. Fill in the project_pk variable in maizeyapi.py with your Maizey Project ID.
 3. Replace the query in maizeyapi.py with whatever you would like to ask Maizey. 
+4. Note that the token in your .env file is the token for an individual Maizey App. To interact with a different app, generate a new token for that app and paste that credential into your .env file instead. 
