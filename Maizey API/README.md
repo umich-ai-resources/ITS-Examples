@@ -10,13 +10,13 @@ To create a new API token, select **API Config** from the menu. Provide a purpos
 
 The **API Config** tab then displays an overview of all the events using that token. Click the **Documentation** button for information about how to use your token.
 
-![Getting Started](../docs/img/3project_token.png)
+![Getting Started](../docs/img/3api_token.png)
 
 # Navigating the U-M Maizey API Documentation
 
 After opening your project, click the **API Config** tab and then click the **Documentation** button. Alternatively, you can acccess the documentation at https://umgpt.umich.edu/api/schema-public/swagger-ui/. 
 
-![Getting Started](../docs/img/4documentation.png)
+![Getting Started](../docs/img/4document.png)
 
 A page detailing Maizey’s API schema and allowing developers to try it out displays. To begin, click **Authorize** and paste your token in. Then, open the first collapsible panel. This endpoint allows you to create a conversation in Maizey.
 
