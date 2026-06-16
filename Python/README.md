@@ -35,4 +35,5 @@ Run `get_models.py` to see all available model names.
 | `python-image.py` | Generate an image saved as a PNG |
 | `python-embeddings.py` | Generate text embeddings and learn what they can be used for |
 | `python-reasoning.py` | Reasoning model using the `reasoning.effort` parameter |
+| `python-document.py` | Analyze a PDF via URL or an uploaded local file |
 | `get_models.py` | List all available models grouped by provider |
